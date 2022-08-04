@@ -87,3 +87,63 @@ This is what this line of code does:
 
 
 Now you can make simple Python functions in one line!
+
+
+# Use Lambda with apply() in Pandas
+
+We can use``` apply()``` to call a lambda function, which will be applied to every row or column of the dataframe and returns a modified version of the original dataframe. If ```axis = 0``` in``` apply()```, the lambda function will be applied to each column. In contrast, If ```axis = 1``` in ```apply()```, the lambda function will be applied to each row.
+
+The following example applies a lambda function to each row to create a new column by calculating how old the cars are. The following shows the original data.
+```python
+import pandas as pd
+car_data = {'Brand': ['Tesla', 'Tesla','Tesla','Ford'], 
+     'Location': ['CA', 'CA','NY','MA'],
+    'Year':[2019,2018,2020,2019]}
+car_data=pd.DataFrame(data=car_data)
+print(car_data)
+```
+```
+    Brand Location  Year
+0  Tesla       CA  2019
+1  Tesla       CA  2018
+2  Tesla       NY  2020
+3   Ford       MA  2019
+```
+Next is the sample code for using``` apply()``` and lambda.
+```python
+car_data["Year_old"]=car_data.apply(lambda x: 2022-x['Year'],axis=1)
+print(car_data)
+```
+```
+   Brand Location  Year   DateTime  Year_old
+   Brand Location  Year  Year_old
+0  Tesla       CA  2019         3
+1  Tesla       CA  2018         4
+2  Tesla       NY  2020         2
+3   Ford       MA  2019         3
+```
+
+# Using Apply with Rows in a Dataframe
+```python
+import pandas as pd
+import numpy as np
+ 
+# creating and initializing a nested list
+values_list = [[15, 2.5, 100], [20, 4.5, 50], [25, 5.2, 80],
+               [45, 5.8, 48], [40, 6.3, 70], [41, 6.4, 90],
+               [51, 2.3, 111]]
+ 
+# creating a pandas dataframe
+df = pd.DataFrame(values_list, columns=['Field_1', 'Field_2', 'Field_3'],
+                  index=['a', 'b', 'c', 'd', 'e', 'f', 'g'])
+ 
+print(df)
+# Apply function numpy.square() to square
+# the values of one row only i.e. row
+# with index name 'd'
+df = df.apply(lambda x: np.square(x) if x.name == 'd' else x, axis=1)
+ 
+ 
+# printing dataframe
+print(df)
+```
