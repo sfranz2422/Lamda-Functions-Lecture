@@ -60,7 +60,7 @@ would print:
 
 We can do this using an if statement in our lambda function, with syntax that looks like:
 ```python
-<WHAT TO RETURN IF STATEMENT IS TRUE> if <IF STATEMENT> else <WHAT TO RETURN IF STATEMENT IS FALSE>
+<WHAT TO RETURN IF STATEMENT IS TRUE> if <CONDITION> else <WHAT TO RETURN IF STATEMENT IS FALSE>
 ```
 So this is what our ```check_if_A_grade``` function might look like:
 ```python
@@ -77,6 +77,17 @@ This is what this line of code does:
 
 3. Otherwise, return 'Did not get an A...' if this statement is not true:
 ```grade >= 90```
+
+# Why Use Lambda Functions?
+
+The power of lambda is better shown when you use them as an anonymous function inside another function.
+
+Say you have a function definition that takes one argument, and that argument will be multiplied with an unknown number:
+
+```py
+def myfunc(n):
+  return lambda a : a * n
+```
 
 # Summary
 * Lambda functions only work if we’re just doing a one line command. If we wanted to write something longer, we’d need a more complex function. 
@@ -142,6 +153,56 @@ print(df)
 # the values of one row only i.e. row
 # with index name 'd'
 df = df.apply(lambda x: np.square(x) if x.name == 'd' else x, axis=1)
+ 
+ 
+# printing dataframe
+print(df)
+```
+
+# Using Apply with Columns in a Dataframe
+```python
+import pandas as pd
+import numpy as np
+ 
+# creating and initializing a nested list
+values_list = [[15, 2.5, 100], [20, 4.5, 50], [25, 5.2, 80],
+               [45, 5.8, 48], [40, 6.3, 70], [41, 6.4, 90],
+               [51, 2.3, 111]]
+ 
+# creating a pandas dataframe
+df = pd.DataFrame(values_list, columns=['Field_1', 'Field_2', 'Field_3'],
+                  index=['a', 'b', 'c', 'd', 'e', 'f', 'g'])
+ 
+print(df)
+# Apply function numpy.square() to square
+# the values of one row only i.e. row
+# with index name 'd'
+df = df.apply(lambda x: np.square(x) if x.name == 'Field_3' else x, axis=0)
+ 
+ 
+# printing dataframe
+print(df)
+```
+
+# Using Apply with Columns in a Dataframe
+```python
+import pandas as pd
+import numpy as np
+ 
+# creating and initializing a nested list
+values_list = [[15, 2.5, 100], [20, 4.5, 50], [25, 5.2, 80],
+               [45, 5.8, 48], [40, 6.3, 70], [41, 6.4, 90],
+               [51, 2.3, 111]]
+ 
+# creating a pandas dataframe
+df = pd.DataFrame(values_list, columns=['Field_1', 'Field_2', 'Field_3'],
+                  index=['a', 'b', 'c', 'd', 'e', 'f', 'g'])
+ 
+print(df)
+# Apply function numpy.square() to square
+# the values of one row only i.e. row
+# with index name 'd'
+df = df.apply(lambda x: np.square(x), axis=0)
  
  
 # printing dataframe

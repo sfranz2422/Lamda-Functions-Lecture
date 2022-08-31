@@ -14,7 +14,7 @@ print(df)
 # Apply function numpy.square() to square
 # the values of one row only i.e. row
 # with index name 'd'
-df = df.apply(lambda x: np.square(x) if x.name == 'd' else x, axis=1)
+df = df.apply(lambda x: np.square(x), axis=0)
  
  
 # printing dataframe
